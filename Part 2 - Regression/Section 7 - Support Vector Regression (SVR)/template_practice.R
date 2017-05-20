@@ -1,0 +1,51 @@
+#Regression template
+
+#######################################
+#####Preprocessing the data############
+#######################################
+
+dataset = read.csv('Position_Salaries.csv')
+dataset = dataset[2:3]
+
+
+#####################################################
+#######Creating the model and fitting dataset########
+#####################################################
+
+#create regression
+
+
+
+
+#####################################################
+###Predicting the new result ########################
+#####################################################
+y_pred = predict(regressor,data.frame(level = 6.5))
+
+
+#####################################################
+##########Visualizing the model######################
+#####################################################
+#simple 
+library(ggplot2)
+ggplot()+
+  geom_point(aes(x = dataset$Level, y = dataset$Salary),
+             colour = 'red')+
+  geom_line(aes(x = dataset$Level, y = predict(regressor,newdata = dataset)),
+            colour = 'blue')+
+  ggtitle('what ever')+
+  xlab('level')+
+  ylab('salary')
+
+
+#smooth visualization
+library(ggplot2)
+x_grid = seq(min(dataset$Level),max(dataset$Level),0.1)
+ggplot()+
+  geom_point(aes(x = dataset$Level, y = dataset$Salary),
+             colour = 'red')+
+  geom_line(aes(x = x_grid, y = predict(regressor,newdata = data.frame(Level = x_grid))),
+              colour = 'blue')+
+  ggtitle('what ever')+
+  xlab('level')+
+  ylab('salary')
